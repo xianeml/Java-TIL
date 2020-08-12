@@ -1,4 +1,7 @@
 import java.util.HashMap;
+import java.util.Set;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Ex10_11 {
 	public static void main(String[] args) {
@@ -21,5 +24,16 @@ public class Ex10_11 {
 		map.remove("age");
 		
 		System.out.println("전체 데이터 출력: "+map);
+		
+		Set<String> keys = map.keySet();
+		System.out.println(keys);
+		for (String key : keys) {
+			System.out.println(key+"="+map.get(key));
+		}
+		Iterator<String> ite = keys.iterator();
+		while(ite.hasNext()) {
+			String key = ite.next();
+			System.out.println(key + "\t" +map.get(key));
+		}
 	}
 }
