@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 public class PersonMapTest2 {
 
@@ -19,6 +21,14 @@ public class PersonMapTest2 {
 				new HashMap<String, ArrayList<Person>>();
 		map.put("one", list1);
 		map.put("two", list2);
+		
+		Set<String> keys = map.keySet();
+		for(String key : keys) {
+			ArrayList<Person> x = map.get(key);
+			for(Person p : x) {
+				System.out.println(p.getName()+"\t"+p.getAge()+"\t"+p.getAddress());
+			}
+		}
 		
 	}
 
