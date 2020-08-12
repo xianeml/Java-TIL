@@ -1,7 +1,7 @@
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 public class Ex10_11 {
 	public static void main(String[] args) {
