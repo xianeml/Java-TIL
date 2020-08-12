@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PersonMapTest2 {
 
@@ -14,8 +15,10 @@ public class PersonMapTest2 {
 		list1.add(new Person("이순신2", 30, "경기2"));
 		list1.add(new Person("이순신3", 40, "경기3"));
 		
-		
-		
+		HashMap<String, ArrayList<Person>> map =
+				new HashMap<String, ArrayList<Person>>();
+		map.put("one", list1);
+		map.put("two", list2);
 		
 	}
 
