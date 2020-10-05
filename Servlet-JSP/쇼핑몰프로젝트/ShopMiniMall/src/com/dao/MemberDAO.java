@@ -19,8 +19,14 @@ public class MemberDAO {
 	}
 
 	public MemberDTO login(SqlSession session, HashMap<String, String> map) {
-	 // "MemberMapper.login" 사용 정보 select MemberDTO생성
-	 MemberDTO n = session.selectOne("MemberMapper.login", map);
-	 return n;
-  }
+		// "MemberMapper.login" 사용 정보 select MemberDTO생성
+		MemberDTO n = session.selectOne("MemberMapper.login", map);
+		return n;
+	}
+
+	public MemberDTO mypage(SqlSession session, String userid) {
+		MemberDTO n = session.selectOne("MemberMapper.mypage", userid);
+		System.out.println(n);
+		return n;
+	}
 }

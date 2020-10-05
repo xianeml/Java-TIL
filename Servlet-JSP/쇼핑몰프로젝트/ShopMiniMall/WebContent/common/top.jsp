@@ -9,7 +9,7 @@
 %>
 안녕하세요.<%= username %>
 <a href="LogoutServlet">로그아웃</a>
-<a href="">MyPage</a>
+<a href="MyPageServlet">MyPage</a>
 <%
 	} else {
 %>

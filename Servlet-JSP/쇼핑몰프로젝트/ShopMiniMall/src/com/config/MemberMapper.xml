@@ -24,5 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from member
 		where userid = #{userid} and passwd = #{passwd}
 	</select>
+	
+	<select id="mypage" parameterType="string" resultType="MemberDTO">
+		select userid,passwd,username,post,addr1,addr2,
+		phone1,phone2,phone3,email1,email2
+		from member
+		where userid = #{userid}
+	</select>
 
 </mapper>
