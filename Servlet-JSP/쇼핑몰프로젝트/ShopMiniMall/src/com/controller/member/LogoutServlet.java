@@ -20,7 +20,7 @@ public class LogoutServlet extends HttpServlet {
 		//세션의 삭제 main.jsp로 이동
 		HttpSession session = request.getSession();
 		session.invalidate();
-		response.sendRedirect("main.jsp");
+		response.sendRedirect("main");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

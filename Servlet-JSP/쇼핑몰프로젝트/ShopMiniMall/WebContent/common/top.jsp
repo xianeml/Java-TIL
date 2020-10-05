@@ -13,7 +13,7 @@
 <%
 	} else {
 %>
-<a href="">로그인</a>
+<a href="LoginUIServlet">로그인</a>
 <a href="MemberUIServlet">회원가입</a>
 <a href="">장바구니</a>
 <%
