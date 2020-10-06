@@ -26,11 +26,24 @@ public class MemberDAO {
 
 	public MemberDTO mypage(SqlSession session, String userid) {
 		MemberDTO n = session.selectOne("MemberMapper.mypage", userid);
+<<<<<<< HEAD
+		return n;
+	}
+
+	public int memberUpdate(SqlSession session, MemberDTO dto) {
+		int n = session.update("MemberMapper.memberUpdate", dto);
+=======
+>>>>>>> update
 		return n;
 	}
 
 	public int memberUpdate(SqlSession session, MemberDTO dto) {
 		int n = session.update("MemberMapper.memberUpdate", dto);
 		return n;
+	}
+	
+	public String idSearch(SqlSession session, MemberDTO dto) {
+		String userid = session.selectOne("MemberMapper.idSearch", dto);
+		return userid;
 	}
 }
