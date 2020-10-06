@@ -28,4 +28,18 @@ public class GoodsService {
 		}
 		return list;
 		}//end idCheck
+
+	public GoodsDTO goodsRetrieve(String gCode) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		GoodsDTO list = null;
+		try {
+			GoodsDAO dao = new GoodsDAO();
+			list = dao.goodsRetrieve(session, gCode);
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return list;
+	}
 }//end class

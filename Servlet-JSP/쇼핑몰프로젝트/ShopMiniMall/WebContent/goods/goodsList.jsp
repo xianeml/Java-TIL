@@ -39,7 +39,7 @@
 					<td>
 						<table style='padding: 15px'>
 							<tr>
-								<td><a href="GoodsRetrieveServlet?gCode=T1"> 
+								<td><a href="GoodsRetrieveServlet?gCode=<%=gCode %>"> 
 								<img src="images/items/<%= gImage %>.gif" border="0" align="center"
 										width="200">
 								</a></td>
