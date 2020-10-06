@@ -8,6 +8,14 @@
 		//form 서브밋
 		//id, 패스워드공백확인
 		//비번확인
+		$("#passwd2").on("keyup",function(){
+		var passwd = $("#passwd").val();
+		var mesg = "비번 불일치";
+		if(passwd == $(this).val()){
+			mesg = "비번 일치";
+		}
+		$("#result2").text(mesg);
+	});
 		//passwd2, passwd일치확인	
 		//이메일 선택
 
@@ -26,7 +34,8 @@
 	String email1 = dto.getEmail1();
 	String email2 = dto.getEmail2();
 %>
-<form action="MemberAddServlet" method="get">
+<form action="MemberUpdateServlet" method="post">
+	<input type="hidden" value="<%= userid %>" name="userid" >
 	*아이디: <%= userid %>
 	<br> <br> *이름:<%= username %>
 	<br> <input type="text" value="<%= post %>" name="post" id="sample4_postcode"
@@ -36,9 +45,9 @@
 		placeholder="도로명주소"> <input type="text" value="<%= addr2 %>" name="addr2"
 		id="sample4_jibunAddress" placeholder="지번주소"> <span id="guide"
 		style="color: #999"></span> <br> 전화번호:<select name="phone1">
-		<option value="017" selected>017</option>
-		<option value="011" selected>011</option>
-		<option value="010" selected>010</option>
+		<option value="017" <% if("017".equals(phone1)){ %> selected<%} %> >017</option>
+		<option value="011" <% if("011".equals(phone1)){ %> selected<%} %>>011</option>
+		<option value="010" <% if("010".equals(phone1)){ %> selected<%} %>>010</option>
 
 	</select>- <input type="text" value="<%= phone2 %>" name="phone2"> -<input
 		type="text" value="<%= phone3 %>" name="phone3"> <br> 이메일:<input
@@ -47,7 +56,7 @@
 	<select id="emailSelect">
 		<option value="daum.net">daum.net</option>
 		<option value="naver.com">naver.com</option>
-	</select> <br> <input type="submit" value="회원가입"> <input
+	</select> <br> <input type="submit" value="수정"> <input
 		type="reset" value="취소">
 </form>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
