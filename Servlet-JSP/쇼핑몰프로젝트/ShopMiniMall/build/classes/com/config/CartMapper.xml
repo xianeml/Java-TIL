@@ -17,5 +17,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from cart
 		where userid = #{userid}	
 	</select>
+	
+	<delete id="cartDel" parameterType="int">
+		delete from cart
+		where num = #{num}
+	</delete>
 
 </mapper>
