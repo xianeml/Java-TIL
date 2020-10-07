@@ -1,6 +1,33 @@
 <%@page import="com.dto.GoodsDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+		String mesg = (String)session.getAttribute("mesg");
+		if(mesg!=null){
+	%>
+	<script>
+		alert('<%= mesg %>');
+	</script>
+	<%
+		session.removeAttribute("mesg");
+		}
+	%>
+<script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#cart").on("click", function(){
+			if($("#gSize").val()=="사이즈선택"){
+				alert("사이즈를 선택하세요");
+				return false;
+			}
+			if($("#gColor").val()=="색상선택"){
+				alert("색상을 선택하세요");
+				return false;
+			}
+			$("form").attr("action", "GoodsCartServlet");
+		})
+	});
+</script>
 <%
 	GoodsDTO dto = (GoodsDTO)request.getAttribute("goodsRetrieve");
 	String gCode = dto.getgCode();
@@ -97,7 +124,7 @@
 	</table>
 
 	<br>
-	<button onclick="reqCheck('order')">구매</button>
+	<button >구매</button>
 	&nbsp;&nbsp;
-	<button onclick="reqCheck('cart')">장바구니</button>
+	<button id="cart">장바구니</button>
 </form>

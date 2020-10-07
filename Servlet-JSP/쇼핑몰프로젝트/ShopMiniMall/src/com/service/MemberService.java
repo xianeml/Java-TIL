@@ -77,8 +77,6 @@ public class MemberService {
 		}
 		return n;
 	}// end memberUpdate
-<<<<<<< HEAD
-=======
 
 	public String idSearch(MemberDTO dto) {
 		SqlSession session = MySqlSessionFactory.getSession();
@@ -93,5 +91,4 @@ public class MemberService {
 		}
 		return userid;
 	}
->>>>>>> update
 }// end class

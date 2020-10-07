@@ -21,7 +21,7 @@ public class GoodsRetrieveServlet extends HttpServlet {
 		
 		GoodsService service = new GoodsService();
 		GoodsDTO dto = service.goodsRetrieve(gCode);
-		
+		System.out.println(dto);
 		request.setAttribute("goodsRetrieve", dto);
 		
 		RequestDispatcher dis = request.getRequestDispatcher("goodsRetrieve.jsp");
