@@ -10,12 +10,12 @@
 안녕하세요.<%= username %>
 <a href="LogoutServlet">로그아웃</a>
 <a href="MyPageServlet">MyPage</a>
+<a href="CartListServlet">장바구니</a>
 <%
 	} else {
 %>
 <a href="LoginUIServlet">로그인</a>
 <a href="MemberUIServlet">회원가입</a>
-<a href="">장바구니</a>
 <%
 	}
 %>
