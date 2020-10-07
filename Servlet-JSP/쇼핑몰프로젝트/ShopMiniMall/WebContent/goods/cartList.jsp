@@ -17,6 +17,29 @@
 			var num = $(this).attr("data-xxx");
 			location.href="CartDelServlet?num="+num;
 		})
+		
+		$(".updateBtn").on("click", function(){
+			var num = $(this).attr("data-xxx");
+			var gAmount = $("#cartAmount"+num).val();
+			var gPrice = $(this).attr("data-price");
+			$.ajax({
+				type:"GET",
+				url: "CartUpdateServlet",
+				dataType:"text",
+				data: {
+					num : num,
+					gAmount : gAmount
+				},
+				success: function(responseData, status, xhr){
+					var sum = gAmount*gPrice;
+					$("#sum"+num).text(sum);
+					//수량하고 가격 곱해서 변경된 가격을 합계에 써주면 된다.
+				},
+				error: function(xhr, status, error){
+					console.log("error");
+				}
+			})
+		})
 	});
 </script>
 
@@ -102,7 +125,7 @@
 				<font size="2" color="#665b5f">[옵션 : 사이즈(<%=gSize %>) , 색상(<%=gColor %>)] </font></td>
 			<td class="td_default" align="center" width="110"><%=gPrice %></td>
 			<td class="td_default" align="center" width="90"><input
-				class="input_default" type="text" name="cartAmount" id="cartAmount"
+				class="input_default" type="text" name="cartAmount" id="cartAmount<%=num %>"
 				style="text-align: right" maxlength="3" size="2" value="<%=gAmount%>"></input></td>
 			<td><input type="button" value="수정" class="updateBtn" data-xxx="<%=num %>" data-price="<%=gPrice %>" /></td>
 			<td class="td_default" align="center" width="80"
@@ -114,7 +137,6 @@
 				class="delBtn" data-xxx="<%=num%>"></td>
 			<td height="10"></td>
 		</tr>
-
 <%
 		}
 %>

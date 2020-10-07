@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
@@ -21,6 +22,10 @@ public class CartDAO {
 	public int cartDel(SqlSession session, int num) {
 		int n = session.delete("CartMapper.cartDel", num);
 		return n;
+	}
+
+	public void cartUpdate(SqlSession session, HashMap<String, Integer> map) {
+		session.update("CartMapper.cartUpdate",map);
 	}
 
 }

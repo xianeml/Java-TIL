@@ -1,6 +1,7 @@
 package com.controller.goods;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -17,34 +18,37 @@ import com.dto.MemberDTO;
 import com.service.CartService;
 import com.service.GoodsService;
 
-@WebServlet("/CartDelServlet")
-public class CartDelServlet extends HttpServlet {
+/**
+ * Servlet implementation class GoodsListServlet
+ */
+@WebServlet("/CartUpdateServlet")
+public class CartUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String nextPage = null;
-		if(dto != null) {
+		if(dto!=null) {
 			String num = request.getParameter("num");
+			String gAmount = request.getParameter("gAmount");
+			HashMap<String, Integer> map = new HashMap<>();
+			map.put("num", Integer.parseInt(num));
+			map.put("gAmount",Integer.parseInt(gAmount));
 			CartService service = new CartService();
-			int n = service.cartDel(Integer.parseInt(num));
-			System.out.println(n);
-			nextPage = "CartListServlet";
+			service.cartUpdate(map);
 		}else {
 			nextPage = "LoginUIServlet";
-			session.setAttribute("mesg", "로그인 필요");
+			session.setAttribute("mesg", "로그인필요");
+			response.sendRedirect(nextPage);
 		}
-		response.sendRedirect(nextPage);
-		
-		
+		 //로그인정보확인
+		 //num, aAmount파싱 
+		 //map에 저장하고 service.cartUpdate(map) ==> Mapper id= cartUpdate 
+		 //로그인 정보가 없을 경우 로그인 폼으로 이동 
+	    
 
-		  //로그인 정보 확인 
-		  //번호 파싱, CartSerivce.cardDel(num)
-		  //삭제 후 장바구니 리스트 다시 보이기 (CartListServlet) - Mapper id = "cartDel"
-		  //로그인 정보가 없을 경우 - 로그인 화면으로 이동 
-		
-		
-	}
+	}//end doGet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
