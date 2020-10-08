@@ -33,7 +33,6 @@ public class CartService {
 		List<CartDTO> list = null;
 		try {
 			list = dao.cartList(session, userid);
-			System.out.println(list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -68,5 +67,20 @@ public class CartService {
 		}finally {
 			session.close();
 		}
+	}
+
+	public int cartAllDel(List<String> list) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		CartDAO dao = new CartDAO();
+		int n = 0;
+		try {
+			n = dao.cartAllDel(session, list);
+			session.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return n;
 	}
 }// end class

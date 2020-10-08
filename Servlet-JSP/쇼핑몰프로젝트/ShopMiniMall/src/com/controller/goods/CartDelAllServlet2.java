@@ -1,7 +1,7 @@
 package com.controller.goods;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -21,32 +21,37 @@ import com.service.GoodsService;
 /**
  * Servlet implementation class GoodsListServlet
  */
-@WebServlet("/CartUpdateServlet")
-public class CartUpdateServlet extends HttpServlet {
+@WebServlet("/CartDelAllServlet2")
+public class CartDelAllServlet2 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//회원정보확인
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String nextPage = null;
 		if(dto!=null) {
-			String num = request.getParameter("num");
-			String gAmount = request.getParameter("gAmount");
-			HashMap<String, Integer> map = new HashMap<>();
-			map.put("num", Integer.parseInt(num));
-			map.put("gAmount",Integer.parseInt(gAmount));
+			String[] check = request.getParameterValues("check");
+			System.out.println(check);
+			
+			List<String> list = Arrays.asList(check);
+			
 			CartService service = new CartService();
-			service.cartUpdate(map);
-		}else {
+			int n = service.cartAllDel(list);
+			nextPage = "CartListServlet";
+		} else {
 			nextPage = "LoginUIServlet";
-			session.setAttribute("mesg", "로그인필요");
-			response.sendRedirect(nextPage);
+			session.setAttribute("mesg", "로그인이 필요한 작업입니다.");
 		}
-
-	}//end doGet
+		response.sendRedirect(nextPage);
+		//getParameterValues 사용 파싱
+		// ,를 기준으로  list에 저장 
+		//serivce.cartAllDel(list) 전체 삭제 mapper id cartAlldel 동적 sql사용
+		// CartListServlet 목록 다시 뿌리기 
+		//비회원 로그인 페이지로 
+		
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -6,6 +6,8 @@
 <script type="text/javascript" src="js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
+		//전체선택
 		$("#allCheck").on("click", function(){
 			for(var i=0; i< $(".check").length; i++){
 				$(".check")[i].checked = this.checked;
@@ -18,6 +20,7 @@
 			location.href="CartDelServlet?num="+num;
 		})
 		
+		//수정버튼
 		$(".updateBtn").on("click", function(){
 			var num = $(this).attr("data-xxx");
 			var gAmount = $("#cartAmount"+num).val();
@@ -39,6 +42,25 @@
 					console.log("error");
 				}
 			})
+		})
+		
+		//전체cart 삭제1 delallCart
+			//전체선택 또는 선택 
+			//num[]에 선택한 check의 value에 담아서 CartDelAllServlet?data=num전달
+		$("#delAllCart").on("click", function(){
+			var num = [];
+			$("input:checkbox[name='check']:checked").each(function(idx, ele){
+				num[idx]=$(this).val();
+			});
+			console.log(num);
+			location.href="CartDelAllServlet?data="+num;
+		})
+		//전체 cart삭제 2 delallCart2
+			//전체선택 또는 선택 
+			//CartDelAllServelt2로 이동 
+		$("#delAllCart2").on("click", function(){
+			$("form").artr("action", "CartDelAllServelt2");
+			$("form").submit(); //trigger
 		})
 	});
 </script>
@@ -116,7 +138,7 @@
 		<tr>
 			<td class="td_default" width="80">
 				<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. --> <input
-				type="checkbox" name="check" id="check81" class="check" value="81">
+				type="checkbox" name="check" id="<%=num %>" class="check" value="<%=num %>">
 			</td>
 			<td class="td_default" width="80"><%= num %></td>
 			<td class="td_default" width="80"><img src="images/items/<%=gImage %>.gif" border="0"
@@ -154,8 +176,9 @@
 	<tr>
 		<td align="center" colspan="5"><a class="a_black"
 			href="javascript:orderAllConfirm(myForm)"> 전체 주문하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-			<a class="a_black" href="javascript:delAllCart(myForm)"> 전체 삭제하기
-		</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="a_black" href="index.jsp"> 계속
+			<a class="a_black" href="#" id="delAllCart"> 전체 삭제하기</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a class="a_black" href="#" id="delAllCart2"> 전체 삭제하기2
+		</a>&nbsp;&nbsp;&nbsp;&nbsp; <a class="a_black" href="main"> 계속
 				쇼핑하기 </a>&nbsp;&nbsp;&nbsp;&nbsp;</td>
 	</tr>
 	<tr>
