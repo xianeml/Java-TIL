@@ -38,5 +38,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{item}
 		</foreach>
 	</delete>
+	
+	<select id="cartbyNum" parameterType="int" resultType="CartDTO">
+		select num, userid, gCode, gName, gPrice, gSize, gColor, gAmount,
+		gImage
+		from cart
+		where num = #{num}	
+	</select>
+	
 
 </mapper>

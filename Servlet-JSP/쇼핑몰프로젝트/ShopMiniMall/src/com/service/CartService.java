@@ -83,4 +83,19 @@ public class CartService {
 		}
 		return n;
 	}
+
+	public CartDTO cartByNum(int num) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		CartDAO dao = new CartDAO();
+		CartDTO cdto = null;
+		try {
+			cdto = dao.cartByNum(session, num);
+			session.commit();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+		return cdto;
+	}
 }// end class

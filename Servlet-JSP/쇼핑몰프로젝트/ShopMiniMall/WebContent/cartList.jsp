@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>장바구니 목록 화면입니다.</h1>
-<jsp:include page="common/top.jsp"></jsp:include>
+<jsp:include page="common/top.jsp"></jsp:include><br>
 <jsp:include page="common/menu.jsp"></jsp:include>
 <hr>
 <jsp:include page="goods/cartList.jsp"></jsp:include>

@@ -33,4 +33,9 @@ public class CartDAO {
 		return n;
 	}
 
+	public CartDTO cartByNum(SqlSession session, int num) {
+		CartDTO cdto = session.selectOne("CartMapper.cartbyNum", num);
+		return cdto;
+	}
+
 }

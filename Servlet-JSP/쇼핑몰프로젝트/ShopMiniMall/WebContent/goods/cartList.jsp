@@ -45,22 +45,26 @@
 		})
 		
 		//전체cart 삭제1 delallCart
-			//전체선택 또는 선택 
-			//num[]에 선택한 check의 value에 담아서 CartDelAllServlet?data=num전달
+		//num[]에 선택한 check의 value에 담아서 CartDelAllServlet?data=num전달
 		$("#delAllCart").on("click", function(){
 			var num = [];
 			$("input:checkbox[name='check']:checked").each(function(idx, ele){
 				num[idx]=$(this).val();
 			});
-			console.log(num);
 			location.href="CartDelAllServlet?data="+num;
 		})
 		//전체 cart삭제 2 delallCart2
-			//전체선택 또는 선택 
-			//CartDelAllServelt2로 이동 
 		$("#delAllCart2").on("click", function(){
 			$("form").artr("action", "CartDelAllServelt2");
 			$("form").submit(); //trigger
+		})
+		
+		///주문버튼
+		//data-xxx이용 CartOrderConfirmServlet?num="+num;
+		$(".orderBtn").on("click", function(){
+			var num = $(this).attr("data-xxx");
+			console.log(num);
+			location.href="CartOrderConfirmServlet?num="+num;
 		})
 	});
 </script>
@@ -152,7 +156,7 @@
 			<td><input type="button" value="수정" class="updateBtn" data-xxx="<%=num %>" data-price="<%=gPrice %>" /></td>
 			<td class="td_default" align="center" width="80"
 				style='padding-left: 5px'><span id="sum<%=num%>"> <%=gPrice*gAmount %></span></td>
-			<td><input type="button" value="주문" onclick="order('81','a')"></td>
+			<td><input type="button" value="주문" class="orderBtn" data-xxx="<%= num%>"></td>
 			<td class="td_default" align="center" width="30"
 				style='padding-left: 10px'>
 				<input type="button" value="삭제" id="xx<%=i%>"

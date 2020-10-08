@@ -1,6 +1,7 @@
 package com.controller.goods;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -16,33 +17,34 @@ import com.dto.GoodsDTO;
 import com.dto.MemberDTO;
 import com.service.CartService;
 import com.service.GoodsService;
+import com.service.MemberService;
 
-@WebServlet("/CartDelServlet")
-public class CartDelServlet extends HttpServlet {
+/**
+ * Servlet implementation class GoodsListServlet
+ */
+@WebServlet("/CartOrderConfirmServlet")
+public class CartOrderConfirmServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String nextPage = null;
-		if(dto != null) {
+		if(dto!=null) {
 			String num = request.getParameter("num");
-			CartService service = new CartService();
-			int n = service.cartDel(Integer.parseInt(num));
-			nextPage = "CartListServlet";
+			CartService cService = new CartService();
+			CartDTO cdto = cService.cartByNum(Integer.parseInt(num));
+			String userid = dto.getUserid();
+			MemberService mService = new MemberService();
+			MemberDTO mdto = mService.mypage(userid);
+			request.setAttribute("cdto", cdto);
+			request.setAttribute("mdto", mdto);
+			nextPage = "orderConfirm.jsp";
 		}else {
 			nextPage = "LoginUIServlet";
-			session.setAttribute("mesg", "로그인 필요");
-		}
-		response.sendRedirect(nextPage);
-		
-		
-
-		  //로그인 정보 확인 
-		  //번호 파싱, CartSerivce.cardDel(num)
-		  //삭제 후 장바구니 리스트 다시 보이기 (CartListServlet) - Mapper id = "cartDel"
-		  //로그인 정보가 없을 경우 - 로그인 화면으로 이동 
-		
-		
+			session.setAttribute("mesg","로그인필요");
+		}		
+		RequestDispatcher dis = request.getRequestDispatcher(nextPage);
+		dis.forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
