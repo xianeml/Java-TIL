@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.dto.CartDTO;
 import com.dto.GoodsDTO;
+import com.dto.OrderDTO;
 
 public class CartDAO {
 
@@ -36,6 +37,12 @@ public class CartDAO {
 	public CartDTO cartByNum(SqlSession session, int num) {
 		CartDTO cdto = session.selectOne("CartMapper.cartbyNum", num);
 		return cdto;
+	}
+
+	public int orderDone(SqlSession session, OrderDTO dto2) {
+		int n = session.insert("OrderMapper.orderDone", dto2);
+		System.out.println("dao:"+n);
+		return n;
 	}
 
 }

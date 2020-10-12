@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.config.MySqlSessionFactory;
 import com.dao.CartDAO;
 import com.dto.CartDTO;
+import com.dto.OrderDTO;
 
 public class CartService {
 
@@ -98,4 +99,25 @@ public class CartService {
 		}
 		return cdto;
 	}
+
+	public int orderDone(OrderDTO dto2, String orderNum) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		CartDAO dao = new CartDAO();
+		int n = 0;
+		try {
+			n = dao.orderDone(session, dto2);
+			n = dao.cartDel(session, Integer.parseInt(orderNum));
+			System.out.println(n);
+			session.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+	
+	
+	
 }// end class
