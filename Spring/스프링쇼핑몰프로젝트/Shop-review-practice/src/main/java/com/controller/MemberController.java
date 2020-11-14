@@ -29,7 +29,8 @@ public class MemberController {
 		MemberDTO dto = (MemberDTO)session.getAttribute("login");
 		String userid = dto.getUserid();
 		MemberDTO mDTO = service.mypage(userid);
-		return "mypage";
+		session.setAttribute("login", mDTO);
+		return "redirect:../myPage";
 	}
 	
 	@RequestMapping(value = "/idDuplicateCheck", produces = "text/plain;charset=UTF-8")
@@ -41,5 +42,11 @@ public class MemberController {
 			mesg = "아이디 중복";
 		}
 		return mesg;
+	}
+	
+	@RequestMapping(value = "/loginCheck/memberUpdate")
+	public String memberUpdate(MemberDTO dto) {
+		service.memberUpdate(dto);
+		return "redirect:../loginCheck/myPage";
 	}
 }

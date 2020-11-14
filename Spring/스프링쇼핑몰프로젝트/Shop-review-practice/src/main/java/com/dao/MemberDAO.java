@@ -27,4 +27,8 @@ public class MemberDAO {
 		return dto;
 	}
 
+	public void memberUpdate(MemberDTO dto) {
+		template.update("MemberMapper.memberUpdate", dto);
+	}
+
 }

@@ -5,13 +5,16 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 
-<script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
 		//form 서브밋
 		$("form").on("submit", function(event) {
 			var userid = $("#userid").val();
 			var passwd = $("#passwd").val();
+			var email1 = $("#email1").val();
+			var email2 = $("#email2").val();
 			if (userid.length == 0) {
 				alert("userid 필수")
 				$("#userid").focus();
@@ -20,9 +23,11 @@
 				alert("passwd 필수")
 				$("#passwd").focus();
 				event.preventDefault();
+			} else if (email1.length == 0 || email2.length == 0) {
+				event.preventDefault();
+				alert("email 확인");
 			}
-		});
-		//비번확인
+		}); //비번확인
 		$("#passwd2").on("keyup", function() {
 			var passwd = $("#passwd").val();
 			var mesg = "비번 불일치";
@@ -41,7 +46,7 @@
 </script>
 
 
-<form action="MemberUpdateServlet" method="post">
+<form action="loginCheck/memberUpdate" method="post">
 	<input type="hidden" value="${login.userid }" name="userid">
 	*아이디: ${login.userid }<br> <br> *이름:${login.username } <br>
 	<input type="text" value="${login.post }" name="post"
