@@ -34,6 +34,24 @@
 			var email = $(this).val();
 			$("#email2").val(email);
 		});
+		
+		$("#userid").on("keyup", () => {
+			$.ajax({
+				url:"idDuplicateCheck",
+				type: "get",
+				data: {
+					id: $("#userid").val(),
+				},
+				dataType: "text",
+				success: (data, status,xhr) => {
+					console.log(data);
+					$("#result").text(data);
+				},
+				error: (xhr, status, error) => {
+					console.log(error);
+				}
+			})
+		});
 
 	});
 </script>
