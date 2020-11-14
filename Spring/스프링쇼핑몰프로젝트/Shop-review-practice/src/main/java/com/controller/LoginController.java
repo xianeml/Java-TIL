@@ -29,4 +29,10 @@ public class LoginController {
 		}
 		return "main";
 	}
+	
+	@RequestMapping(value = "/loginCheck/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:../";
+	}
 }

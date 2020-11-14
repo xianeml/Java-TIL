@@ -22,4 +22,9 @@ public class MemberDAO {
 		return dto;
 	}
 
+	public MemberDTO myPage(String userid) {
+		MemberDTO dto = template.selectOne("MemberMapper.mypage", userid);
+		return dto;
+	}
+
 }

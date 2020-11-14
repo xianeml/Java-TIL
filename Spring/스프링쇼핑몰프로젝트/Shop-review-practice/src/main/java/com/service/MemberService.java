@@ -22,4 +22,9 @@ public class MemberService {
 		MemberDTO dto = dao.login(map);
 		return dto;
 	}
+
+	public MemberDTO mypage(String userid) {
+		MemberDTO dto = dao.myPage(userid);
+		return dto;
+	}
 }
