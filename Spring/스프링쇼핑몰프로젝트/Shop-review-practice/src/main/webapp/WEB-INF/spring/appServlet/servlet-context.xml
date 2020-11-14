@@ -11,6 +11,8 @@
 	<mvc:annotation-driven />
 	<mvc:default-servlet-handler/>
 	<mvc:view-controller path="/" view-name="main"/>
+	<mvc:view-controller path="/memberForm" view-name="memberForm"/>
+	<mvc:view-controller path="/loginForm" view-name="loginForm"/>
 	
 	<!-- 리소스 등록 -->
 	<mvc:resources location="/WEB-INF/views/images/" mapping="/images/**"/>
