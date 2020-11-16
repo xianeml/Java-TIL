@@ -19,4 +19,9 @@ public class GoodsDAO {
 		return list;
 	}
 
+	public GoodsDTO goodsRetrieve(String gCode) {
+		GoodsDTO dto = template.selectOne("GoodsMapper.goodsRetrieve", gCode);
+		return dto;
+	}
+
 }

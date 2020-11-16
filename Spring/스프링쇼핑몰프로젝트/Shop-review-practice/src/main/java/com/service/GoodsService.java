@@ -18,5 +18,10 @@ public class GoodsService {
 		List<GoodsDTO> list = dao.goodsList(gCategory);
 		return list;
 	}
+
+	public GoodsDTO goodsRetrieve(String gCode) {
+		GoodsDTO dto = dao.goodsRetrieve(gCode);
+		return dto;
+	}
 	
 }
