@@ -22,12 +22,13 @@ public class LoginController {
 	@RequestMapping(value = "/login")
 	public String login(@RequestParam Map<String, String> map, Model model, HttpSession session) {
 		MemberDTO dto = service.login(map);
-		session.setAttribute("login", dto);
-		if(dto==null) {
+		if(dto!=null) {
+			session.setAttribute("login", dto);
+			return "redirect:goodsList?gCategory=top";
+		}else {
 			model.addAttribute("mesg", "아이디 또는 비번이 잘못되었습니다.");
 			return "loginForm";
 		}
-		return "main";
 	}
 	
 	@RequestMapping(value = "/loginCheck/logout")
