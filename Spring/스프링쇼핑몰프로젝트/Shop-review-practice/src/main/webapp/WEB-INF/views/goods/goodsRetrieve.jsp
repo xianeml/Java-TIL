@@ -7,6 +7,7 @@
 	<script>
 		alert("${mesg}상품을 장바구니에 담았습니다.");
 	</script>
+	<c:remove var="mesg"/>
 </c:if>
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
@@ -34,7 +35,7 @@
 				alert("색상을 선택하세요");
 				return false;
 			}
-			$("form").attr("action", "GoodsCartServlet");
+			$("form").attr("action", "loginCheck/cartAdd");
 
 		});
 	});

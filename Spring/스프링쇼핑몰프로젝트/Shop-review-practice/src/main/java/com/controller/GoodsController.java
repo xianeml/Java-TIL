@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dto.CartDTO;
 import com.dto.GoodsDTO;
+import com.dto.MemberDTO;
 import com.service.GoodsService;
 
 @Controller
@@ -37,5 +39,15 @@ public class GoodsController {
 	public GoodsDTO goodsRetrieve(@RequestParam("gCode") String gCode) {
 		GoodsDTO dto = service.goodsRetrieve(gCode);
 		return dto;
+	}
+	
+	@RequestMapping(value = "/loginCheck/cartAdd")
+	public String cartAdd(CartDTO cart, HttpSession session) {
+		MemberDTO mDTO = (MemberDTO)session.getAttribute("login");
+		String userid = mDTO.getUserid();
+		cart.setUserid(userid);
+		session.setAttribute("mesg", cart.getgCode());
+		service.cartAdd(cart);
+		return "redirect:../goodsRetrieve?gCode="+cart.getgCode();
 	}
 }
