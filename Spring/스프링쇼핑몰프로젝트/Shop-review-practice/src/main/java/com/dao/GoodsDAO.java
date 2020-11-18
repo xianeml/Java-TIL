@@ -29,4 +29,9 @@ public class GoodsDAO {
 		template.insert("CartMapper.cartAdd", cart);
 	}
 
+	public List<CartDTO> cartList(String userid) {
+		List<CartDTO> list = template.selectList("CartMapper.cartList", userid);
+		return list;
+	}
+
 }

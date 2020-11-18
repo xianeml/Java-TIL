@@ -10,5 +10,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{gSize},#{gColor},#{gAmount},#{gName},#{gImage})
 	</insert>
 
+	<select id="cartList" parameterType="string" resultType="CartDTO">
+	  	select num,userid,gCode,gPrice,gSize,gColor,gAmount,gName,gImage
+	  	from cart
+	  	where userid = #{userid}
+	</select>
 
 </mapper>

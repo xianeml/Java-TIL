@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dto.CartDTO;
 import com.dto.GoodsDTO;
@@ -49,5 +50,14 @@ public class GoodsController {
 		session.setAttribute("mesg", cart.getgCode());
 		service.cartAdd(cart);
 		return "redirect:../goodsRetrieve?gCode="+cart.getgCode();
+	}
+	
+	@RequestMapping(value = "/loginCheck/cartList")
+	public String cartList(RedirectAttributes attr, HttpSession session) {
+		MemberDTO mDTO = (MemberDTO) session.getAttribute("login");
+		String userid = mDTO.getUserid();
+		List<CartDTO> list = service.cartList(userid);
+		attr.addFlashAttribute("cartList", list);
+		return "redirect:../cartList";
 	}
 }
