@@ -16,4 +16,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  	where userid = #{userid}
 	</select>
 
+	<update id="cartUpdate" parameterType="hashmap">
+		update cart
+		set gAmount = #{gAmount}
+		where num = #{num}
+	</update>
 </mapper>

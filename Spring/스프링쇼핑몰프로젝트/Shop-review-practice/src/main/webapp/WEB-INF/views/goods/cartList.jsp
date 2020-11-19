@@ -6,15 +6,25 @@
 
 <script type="text/javascript" src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script type="text/javascript">
+	function total() {
+		var totalSum = 0;
+		$(".sum").each(function(idx, data) {
+			totalSum += Number.parseInt($(data).text());
+		});
+		$("#totalSum").text(totalSum);
+	}
+
 	$(document).ready(function() {
+
+		total();
 
 		//수정버튼
 		$(".updateBtn").on("click", function() {
-			var num = $(this).attr("data-xxx");
+			var num = $(this).attr("data-num");
 			var gAmount = $("#cartAmount" + num).val();
 			var gPrice = $(this).attr("data-price");
 			$.ajax({
-				url : 'CartUpdateServlet',
+				url : 'loginCheck/cartUpdate',
 				type : 'get',
 				dataType : 'text',
 				data : {
@@ -22,8 +32,9 @@
 					gAmount : gAmount
 				},
 				success : function(data, status, xhr) {
-					var sum = gAmount * gPrice;
+					var sum = parseInt(gAmount) * parseInt(gPrice);
 					$("#sum" + num).text(sum);
+					total();
 				},
 				error : function(xhr, status, error) {
 
@@ -54,7 +65,7 @@
 			console.log(num);
 			location.href = "CartDelAllServlet?data=" + num;
 		});
-		
+
 		//전체cart 삭제
 		$("#delAllCart2").on("click", function() {
 
@@ -121,42 +132,45 @@
 
 
 	<form name="myForm">
-	<c:forEach var="dto" items="${cartList }" varStatus="status">
-		<tr>
-			<td class="td_default" width="80">
-				<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. --> <input
-				type="checkbox" name="check" id="check81" class="check"
-				value="${dto.num }">
-			</td>
-			<td class="td_default" width="80">${dto.num }</td>
-			<td class="td_default" width="80"><img
-				src="images/items/${dto.gImage }.gif" border="0" align="center"
-				width="80" /></td>
-			<td class="td_default" width="300" style='padding-left: 30px'>${dto.gName }
-				<br> <font size="2" color="#665b5f">[옵션 : 사이즈(${dto.gSize })
-					, 색상(${dto.gColor })]
-			</font></td>
-			<td class="td_default" align="center" width="110">${dto.gPrice }
-			</td>
-			<td class="td_default" align="center" width="90"><input
-				class="input_default" type="text" name="cartAmount"
-				id="cartAmount${dto.num }" style="text-align: right" maxlength="3"
-				size="2" value="${dto.gAmount }"></input></td>
-			<td><input type="button" value="수정" class="updateBtn"
-				data-xxx="${dto.num }" data-price="${dto.gPrice }"></td>
-			<td class="td_default" align="center" width="80"
-				style='padding-left: 5px'><span id="sum${dto.num }"> ${dto.gPrice * dto.gAmount }
-			</span></td>
-			<td><input type="button" value="주문" class="orderBtn"
-				data-xxx="${dto.num }"></td>
-			<td class="td_default" align="center" width="30"
-				style='padding-left: 10px'><input type="button" value="삭제"
-				class="delBtn" data-xxx="${dto.num }"></td>
-			<td height="10"></td>
-		</tr>
-	</c:forEach>
+		<c:forEach var="dto" items="${cartList }" varStatus="status">
+			<tr>
+				<td class="td_default" width="80">
+					<!-- checkbox는 체크된 값만 서블릿으로 넘어간다. 따라서 value에 삭제할 num값을 설정한다. --> <input
+					type="checkbox" name="check" id="check81" class="check"
+					value="${dto.num }">
+				</td>
+				<td class="td_default" width="80">${dto.num }</td>
+				<td class="td_default" width="80"><img
+					src="images/items/${dto.gImage }.gif" border="0" align="center"
+					width="80" /></td>
+				<td class="td_default" width="300" style='padding-left: 30px'>${dto.gName }
+					<br> <font size="2" color="#665b5f">[옵션 :
+						사이즈(${dto.gSize }) , 색상(${dto.gColor })] </font>
+				</td>
+				<td class="td_default" align="center" width="110">${dto.gPrice }
+				</td>
+				<td class="td_default" align="center" width="90"><input
+					class="input_default" type="text" name="cartAmount"
+					id="cartAmount${dto.num }" style="text-align: right" maxlength="3"
+					size="2" value="${dto.gAmount }"></input></td>
+				<td><input type="button" value="수정" class="updateBtn"
+					data-num="${dto.num }" data-price="${dto.gPrice }"></td>
+				<td class="td_default" align="center" width="80"
+					style='padding-left: 5px'><span id="sum${dto.num }"
+					class="sum"> ${dto.gPrice * dto.gAmount } </span></td>
+				<td><input type="button" value="주문" class="orderBtn"
+					data-num="${dto.num }"></td>
+				<td class="td_default" align="center" width="30"
+					style='padding-left: 10px'><input type="button" value="삭제"
+					class="delBtn" data-num="${dto.num }"></td>
+				<td height="10"></td>
+			</tr>
+		</c:forEach>
 	</form>
-	
+	<tr>
+		<td colspan="10" align="right">총합 : <span id="totalSum"></span>
+		</td>
+	</tr>
 	<tr>
 		<td colspan="10">
 			<hr size="1" color="CCCCCC">

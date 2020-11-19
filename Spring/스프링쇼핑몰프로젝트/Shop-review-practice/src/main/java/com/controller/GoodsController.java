@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -58,6 +59,13 @@ public class GoodsController {
 		String userid = mDTO.getUserid();
 		List<CartDTO> list = service.cartList(userid);
 		attr.addFlashAttribute("cartList", list);
+		return "redirect:../cartList";
+	}
+	
+	@RequestMapping(value = "/loginCheck/cartUpdate")
+	public String cartUpdate(@RequestParam Map<String, String> map) {
+		System.out.println(map);
+		service.cartUpdate(map);
 		return "redirect:../cartList";
 	}
 }
