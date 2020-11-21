@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -64,8 +65,14 @@ public class GoodsController {
 	
 	@RequestMapping(value = "/loginCheck/cartUpdate")
 	public String cartUpdate(@RequestParam Map<String, String> map) {
-		System.out.println(map);
 		service.cartUpdate(map);
 		return "redirect:../cartList";
 	}
+	
+	@RequestMapping(value = "/loginCheck/cartDelete")
+	@ResponseBody
+	public void cartDelete(@RequestParam("num") int num) {
+		service.cartDelete(num);
+	}
+	
 }

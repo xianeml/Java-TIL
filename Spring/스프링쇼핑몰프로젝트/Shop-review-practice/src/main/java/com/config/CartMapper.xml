@@ -21,4 +21,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		set gAmount = #{gAmount}
 		where num = #{num}
 	</update>
+	
+	<delete id="cartDelete" parameterType="int">
+		delete from cart
+		where num = #{num}
+	</delete>
 </mapper>

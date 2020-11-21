@@ -44,10 +44,25 @@
 
 		//삭제버튼
 		$(".delBtn").on("click", function() {
-			var num = $(this).attr("data-xxx");
-			location.href = "CartDelServlet?num=" + num;
+			var num = $(this).attr("data-num");
+			var xxx = $(this);
+			$.ajax({
+				url : 'loginCheck/cartDelete',
+				type : 'get',
+				dataType : 'text',
+				data : {
+					num : num,
+				},
+				success : function(data, status, xhr) {
+					console.log("success");
+					xxx.parents().filter("tr").remove();
+				},
+				error : function(xhr, status, error) {
+					console.log(error);
+				}
+			});
 		});
-
+		
 		//전체선택
 		$("#allCheck").on("click", function() {
 			var result = this.checked;

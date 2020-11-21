@@ -38,5 +38,9 @@ public class GoodsService {
 	public void cartUpdate(Map<String, String> map) {
 		dao.cartUpdate(map);
 	}
+
+	public void cartDelete(int num) {
+		dao.cartDelete(num);
+	}
 	
 }

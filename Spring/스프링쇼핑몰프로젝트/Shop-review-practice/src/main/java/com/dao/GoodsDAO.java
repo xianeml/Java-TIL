@@ -39,4 +39,8 @@ public class GoodsDAO {
 		template.update("CartMapper.cartUpdate", map);
 	}
 
+	public void cartDelete(int num) {
+		template.delete("CartMapper.cartDelete", num);
+	}
+
 }
