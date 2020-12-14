@@ -66,7 +66,7 @@
    $(() => {
 	   const formObj = $("form");
 	   $("button").on("click", function(e) {
-		   e.preventDefault();
+		   e.preventDefault();,,,,c
 		   const operation = $(this).data("oper");
 		   console.log(operation);
 		   
