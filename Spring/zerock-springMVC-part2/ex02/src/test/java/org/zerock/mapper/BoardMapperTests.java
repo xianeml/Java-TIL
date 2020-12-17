@@ -78,7 +78,7 @@ public class BoardMapperTests {
 	@Test
 	public void testPaging() {
 		Criteria cri = new Criteria();
-		// 10개씩 3페이지
+		// 3페이지에 해당하는 게시물 10개 출력
 		cri.setPageNum(3);
 		cri.setAmount(10);
 		List<BoardVO> list = mapper.getListWithPaging(cri);
